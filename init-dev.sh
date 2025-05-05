@@ -1,6 +1,7 @@
 #!/bin/bash
 # ubuntu 環境初始化
-# 執行 : `curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | sed 's/apt /sudo apt /' | bash`
+# 使用：
+#   一般執行：curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | sed 's/apt /sudo apt /' | bash
 
 set -e
 
@@ -18,12 +19,14 @@ curl https://pyenv.run | bash
 # 寫入 .bashrc 讓未來 shell 自動套用
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/shims:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 
 # 立即生效 pyenv（不等重開 terminal）
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
@@ -44,7 +47,8 @@ poetry self add poetry-plugin-export
 
 # ----------------------------------
 echo -e "\n✅ 開發工具初始化完成"
-echo "✅ apt: make, curl"
-echo "✅ pyenv python : 3.11.9, 3.12.3（預設 3.12.3）"
+echo "✅ apt: make, curl, 其他開發依賴"
+echo "✅ pyenv python : 3.11.9, 3.12.3（已設為全域）"
 echo "✅ pip: poetry, uvicorn"
 echo "✅ poetry plugin 安裝完成"
+echo "💡 請重新開啟終端機或執行：source ~/.bashrc，以確保 poetry 指令可用"
