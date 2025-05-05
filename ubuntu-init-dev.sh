@@ -59,6 +59,7 @@ pip install --upgrade pip
 # 安裝 poetry 與 plugins（作用在 pyenv 的 Python 上）
 pip install poetry uvicorn[standard]
 poetry self add poetry-plugin-export
+poetry config virtualenvs.in-project true
 
 # ----------------------------------
 echo -e "\n✅ 開發工具初始化完成"
