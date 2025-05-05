@@ -1,6 +1,6 @@
 #!/bin/bash
 # ubuntu 環境初始化
-#　執行　: `curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | bash`
+#　執行　: `curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | sed 's/apt /sudo apt /' | bash`
 
 set -e
 
