@@ -1,9 +1,24 @@
 #!/bin/bash
-# ubuntu 環境初始化
-# 執行前請先使用 管理員執行 powershell wsl --unregister Ubuntu-22.04 重置 ubuntu 環境
-# 使用：
-#   一般執行：curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/ubuntu-init-dev.sh | sed 's/apt /sudo apt /' | bash
+# Ubuntu 22.04 開發環境初始化腳本
+# 建議先執行：wsl --unregister Ubuntu-22.04 重置 WSL 環境
+# 使用方式：
+#   curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/ubuntu-init-dev.sh | sed 's/apt /sudo apt /' | bash
 
+#-------------------
+# ✅ 安裝開發工具
+# - pyenv：管理多版本 Python（3.11.9、3.12.3）
+# - pip：升級 pip 並安裝 poetry、uvicorn
+# - poetry：Python 套件與虛擬環境管理器，含 export plugin
+# - 基本工具：make, curl, git, build-essential 等
+
+#-------------------
+# ⚙️ 特殊設定
+# - set -e：出錯即中止腳本
+# - 寫入 ~/.bashrc：自動套用 pyenv 環境
+# - 即時生效 pyenv：不需重開終端機
+# - 使用 pyenv 的 pip 安裝 poetry，確保版本一致
+
+#-------------------
 set -e
 
 echo "🔧 開始安裝開發工具..."
