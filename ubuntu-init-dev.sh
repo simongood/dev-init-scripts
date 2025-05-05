@@ -1,7 +1,8 @@
 #!/bin/bash
 # ubuntu 環境初始化
+# 執行前請先使用 管理員執行 powershell wsl --unregister Ubuntu-22.04 重置 ubuntu 環境
 # 使用：
-#   一般執行：curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | sed 's/apt /sudo apt /' | bash
+#   一般執行：curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/ubuntu-init-dev.sh | sed 's/apt /sudo apt /' | bash
 
 set -e
 
