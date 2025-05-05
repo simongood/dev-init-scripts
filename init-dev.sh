@@ -17,11 +17,11 @@ sudo apt install -y make curl git build-essential libssl-dev zlib1g-dev \
 curl https://pyenv.run | bash
 
 # 寫入 .bashrc 讓未來 shell 自動套用
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/shims:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc            # 設定 pyenv 的根目錄變數
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc         # 把 pyenv 的執行檔加入 PATH（可使用 pyenv 指令）
+echo 'export PATH="$PYENV_ROOT/shims:$PATH"' >> ~/.bashrc       # 把 pyenv shim 加入 PATH（確保 python/poetry 等 shim 指令可用）
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc                 # 初始化 pyenv 的 PATH 邏輯（適用 login shell）
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc                      # 初始化 pyenv 的功能（如切換版本、shim 邏輯）
 
 # 立即生效 pyenv（不等重開 terminal）
 export PYENV_ROOT="$HOME/.pyenv"
