@@ -1,36 +1,50 @@
 #!/bin/bash
 # ubuntu 環境初始化
-#　執行　: `curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | sed 's/apt /sudo apt /' | bash`
+# 執行 : `curl -sSL https://raw.githubusercontent.com/simongood/dev-init-scripts/master/init-dev.sh | sed 's/apt /sudo apt /' | bash`
 
 set -e
 
 echo "🔧 開始安裝開發工具..."
 
-apt update && \
-apt install -y make curl && \
+sudo apt update && \
+sudo apt install -y make curl git build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget llvm libncursesw5-dev \
+    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # -----------------------------------
 # 安裝 pyenv
 curl https://pyenv.run | bash
-      
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc      # 設定 pyenv 環境變數
+
+# 寫入 .bashrc 讓未來 shell 自動套用
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 
-pyenv install 3.11.9                    # 安裝 Python 並設為全域版本
+# 立即生效 pyenv（不等重開 terminal）
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+# 安裝 Python 並設為全域版本
+pyenv install 3.11.9
 pyenv install 3.12.3
 pyenv global 3.12.3
 
+# 確保使用的是 pyenv 的 pip
+hash -r
+pip install --upgrade pip
+
 # ---------------------------------
-# 安裝 poetry 
-pip install poetry uvicorn[standard] && \
-poetry self add poetry-plugin-export && \
+# 安裝 poetry 與 plugins（作用在 pyenv 的 Python 上）
+pip install poetry uvicorn[standard]
+poetry self add poetry-plugin-export
 poetry self add poetry-plugin-export
 
 # ----------------------------------
 echo -e "\n✅ 開發工具初始化完成"
 echo "✅ apt: make, curl"
-echo "✅ pyenv python : 3.11.9 3.12.3"
+echo "✅ pyenv python : 3.11.9, 3.12.3（預設 3.12.3）"
 echo "✅ pip: poetry, uvicorn"
 echo "✅ poetry plugin 安裝完成"
